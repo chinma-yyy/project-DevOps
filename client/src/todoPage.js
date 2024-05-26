@@ -9,6 +9,7 @@ function TodoPage() {
 	const [input, setInput] = useState('');
 	const [editingTodo, setEditingTodo] = useState(null);
 	const [editText, setEditText] = useState('');
+	const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 	useEffect(() => {
 		fetchTodos();
@@ -16,7 +17,7 @@ function TodoPage() {
 
 	const fetchTodos = async () => {
 		try {
-			const response = await axios.get('http://localhost:5000/api/todos');
+			const response = await axios.get(`${backendUrl}/api/todos`);
 			setTodos(response.data);
 		} catch (error) {
 			console.error('Error fetching Todos:', error);
@@ -26,7 +27,7 @@ function TodoPage() {
 	const addTodo = async () => {
 		if (input.trim() !== '') {
 			try {
-				const response = await axios.post('http://localhost:5000/api/todos', {
+				const response = await axios.post(`${backendUrl}/api/todos`, {
 					text: input,
 				});
 				setTodos([...todos, response.data]);
@@ -49,7 +50,7 @@ function TodoPage() {
 
 	const editTodo = async (id, newText) => {
 		try {
-			await axios.put(`http://localhost:5000/api/todos/${id}`, {
+			await axios.put(`${backendUrl}/api/todos/${id}`, {
 				text: newText,
 			});
 			const updatedTodos = todos.map((todo) =>
@@ -64,7 +65,7 @@ function TodoPage() {
 
 	const deleteTodo = async (id) => {
 		try {
-			await axios.delete(`http://localhost:5000/api/todos/${id}`);
+			await axios.delete(`${backendUrl}/api/todos/${id}`);
 			setTodos(todos.filter((todo) => todo._id !== id));
 		} catch (error) {
 			console.error('Error deleting Todo:', error);
