@@ -43,12 +43,17 @@ if (DB_TYPE === 'mysql') {
 	});
 
 	class TodoModel extends Model {
-		public id!: number;
+		public _id!: number;
 		public text!: string;
 	}
 
 	TodoModel.init(
 		{
+			_id: {
+				type: DataTypes.INTEGER.UNSIGNED,
+				autoIncrement: true,
+				primaryKey: true,
+			},
 			text: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -57,6 +62,7 @@ if (DB_TYPE === 'mysql') {
 		{
 			sequelize,
 			modelName: 'Todo',
+			timestamps: false,
 		},
 	);
 
@@ -84,6 +90,7 @@ app.post('/api/todos', async (req: Request, res: Response) => {
 		}
 		res.status(201).json(todo);
 	} catch (error) {
+		console.log(error);
 		res.status(500).json({ error: 'Server error' });
 	}
 });

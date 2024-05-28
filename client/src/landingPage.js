@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 const LandingPage = () => {
 	const [data, setData] = useState(null);
+	const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 	useEffect(() => {
-		const backendUrl = process.env.REACT_APP_BACKEND_URL;
 		const endpoint = `${backendUrl}/api/id`;
-		// Replace 'your-backend-endpoint' with your actual backend endpoint
 		fetch(endpoint)
-			.then(response => response.json())
-			.then(data => setData(data))
-			.catch(error => console.error('Error fetching data:', error));
+			.then((response) => response.json())
+			.then((data) => setData(data))
+			.catch((error) => console.error('Error fetching data:', error));
 	}, []);
 
 	return (
@@ -20,6 +19,11 @@ const LandingPage = () => {
 			<button onClick={() => (window.location.href = '/todos')}>
 				Go to Todos
 			</button>
+			<div> </div>
+			<img
+				src="https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg"
+				alt="Landing"
+			/>
 		</div>
 	);
 };
