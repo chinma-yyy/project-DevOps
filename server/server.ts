@@ -4,7 +4,6 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import morgan from 'morgan';
-
 dotenv.config();
 
 const app: Application = express();
@@ -15,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 
+//@ts-ignore
 let Todo: any;
 
 // MongoDB setup
@@ -153,6 +153,7 @@ app.delete('/api/todos/:id', async (req: Request, res: Response) => {
 	}
 });
 
+// Endpoint to get environment ID
 app.get('/api/id', (req: Request, res: Response) => {
 	try {
 		const envId = process.env.AWS_REGION || 'something unique';

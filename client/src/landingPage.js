@@ -19,6 +19,7 @@ const LandingPage = () => {
 			<button onClick={() => (window.location.href = '/todos')}>
 				Go to Todos
 			</button>
+			<div></div>
 			<div> </div>
 			<img
 				src="https://cdn.pixabay.com/photo/2024/02/28/07/42/european-shorthair-8601492_640.jpg"
